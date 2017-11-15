@@ -13,6 +13,7 @@ Gemfile.lock
 # Book build output
 _book
 _site
+_draft
 
 # eBook build output
 *.epub
