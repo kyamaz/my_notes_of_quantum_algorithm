@@ -1,3 +1,5 @@
+{% include relative %}
+{% include mathjax %}
 # Grover アルゴリズムについて
 
 1996, Lov Grover, **"A fast quantum mechanical algorithm for database search"** [quant-ph/9605043](https://arxiv.org/abs/quant-ph/9605043)
@@ -302,4 +304,3 @@ sympy.physics.quantum パッケージをインポートします.
 -|11>
 ```
 
-{% include mathjax.html %}
