@@ -1,3 +1,5 @@
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
 # Grover アルゴリズムについて
 
 1996, Lov Grover, **"A fast quantum mechanical algorithm for database search"** [quant-ph/9605043](https://arxiv.org/abs/quant-ph/9605043)
