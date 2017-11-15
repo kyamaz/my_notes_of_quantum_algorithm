@@ -48,12 +48,7 @@ Grover アルゴリズムは, 振幅増幅手法と呼ばれる操作を行い, 
 
 　　　　　マーキングされた状態の全確率振幅 $$ \langle\alpha\rangle $$ は, $$ \left( \frac{1}{2} + \frac{1}{2} - \frac{1}{2} + \frac{1}{2} \right) / 4 = \frac{1}{4} $$ です.  
 
-　　　　　$$ \lvert\phi\rangle^{\prime}_{marked} = 
-\left(\frac{1}{4}-\frac{1}{2}+\frac{1}{4}\right) \lvert00\rangle 
-+ \left(\frac{1}{4}-\frac{1}{2}+\frac{1}{4}\right) \lvert01\rangle 
-+ \left(\frac{1}{4}+\frac{1}{2} +\frac{1}{4}\right) \lvert10\rangle 
-+ \left(\frac{1}{4}-\frac{1}{2}+\frac{1}{4}\right) \lvert11\rangle = \lvert10\rangle
-$$
+　　　　　$$ \lvert\phi\rangle^{\prime}_{marked} = \left(\frac{1}{4}-\frac{1}{2}+\frac{1}{4}\right) \lvert00\rangle + \left(\frac{1}{4}-\frac{1}{2}+\frac{1}{4}\right) \lvert01\rangle + \left(\frac{1}{4}+\frac{1}{2} +\frac{1}{4}\right) \lvert10\rangle + \left(\frac{1}{4}-\frac{1}{2}+\frac{1}{4}\right) \lvert11\rangle = \lvert10\rangle $$
 
 　　　　　この状態 $$ \lvert\phi\rangle^{\prime}_{marked} $$ を観測すると, $$ \lvert10\rangle $$ の確率が $$ 1 $$ となり, $$ \lvert10\rangle $$ の状態を探しだすことができます.  
 
@@ -63,47 +58,22 @@ $$
 
   2-qubit の例（わずかな確率で検索対象が含まれている例） :  
 
-　（問題）　$$ \lvert\phi\rangle =
-\frac{400\sqrt{3}}{1201} \lvert00\rangle
-+ \frac{400\sqrt{3}}{1201} \lvert01\rangle 
-+ \frac{49}{1201} \lvert10\rangle 
-+ \frac{400\sqrt{3}}{1201} \lvert11\rangle 
-$$  
+　（問題）　$$ \lvert\phi\rangle = \frac{400\sqrt{3}}{1201} \lvert00\rangle + \frac{400\sqrt{3}}{1201} \lvert01\rangle + \frac{49}{1201} \lvert10\rangle + \frac{400\sqrt{3}}{1201} \lvert11\rangle $$  
 <br />
-　　　　　　$$ \lvert\phi\rangle = 
-\textstyle \class{mathfont-r}{0.0407 \cdots} \lvert10\rangle 
-+  0.5768 \cdots \left( \lvert00\rangle + \lvert01\rangle + \lvert11\rangle \right)
-$$  
+　　　　　　$$ \lvert\phi\rangle = \textstyle \class{mathfont-r}{0.0407 \cdots} \lvert10\rangle +  0.5768 \cdots \left( \lvert00\rangle + \lvert01\rangle + \lvert11\rangle \right) $$  
 <br />
 　　　　　　問題の $$ \lvert10\rangle $$ の確率は, $$ \left(0.0407 \cdots\right)^{2} \approx \textstyle \class{mathfont-r}{0.166 \%} $$
 <br />
 <br />
-　（手順１）$$ \lvert\phi\rangle_{marked} = 
-\frac{400\sqrt{3}}{1201} \lvert00\rangle
-+ \frac{400\sqrt{3}}{1201} \lvert01\rangle 
-- \frac{49}{1201} \lvert10\rangle 
-+ \frac{400\sqrt{3}}{1201} \lvert11\rangle 
-$$  
+　（手順１）$$ \lvert\phi\rangle_{marked} = \frac{400\sqrt{3}}{1201} \lvert00\rangle + \frac{400\sqrt{3}}{1201} \lvert01\rangle - \frac{49}{1201} \lvert10\rangle + \frac{400\sqrt{3}}{1201} \lvert11\rangle $$  
 <br />
-　　　　　　全確率振幅平均は, $$ \langle\alpha\rangle = \frac{1200\sqrt{3}-49}{1201\times 4} 
-$$  
+　　　　　　全確率振幅平均は, $$ \langle\alpha\rangle = \frac{1200\sqrt{3}-49}{1201\times 4} $$  
 <br />
-　（手順２）$$ \lvert\phi\rangle^{\prime}_{marked} = 
-\frac{400\sqrt{3}-49}{1201\times 2} \lvert00\rangle
-+ \frac{400\sqrt{3}-49}{1201\times 2} \lvert01\rangle 
-+ \frac{1200\sqrt{3}+49}{1201\times 2} \lvert10\rangle 
-+ \frac{400\sqrt{3}-49}{1201\times 2} \lvert11\rangle 
-$$  
+　（手順２）$$ \lvert\phi\rangle^{\prime}_{marked} = \frac{400\sqrt{3}-49}{1201\times 2} \lvert00\rangle + \frac{400\sqrt{3}-49}{1201\times 2} \lvert01\rangle + \frac{1200\sqrt{3}+49}{1201\times 2} \lvert10\rangle + \frac{400\sqrt{3}-49}{1201\times 2} \lvert11\rangle $$  
 <br />
-　　　　　　$$ \lvert\phi\rangle^{\prime}_{marked} = 
-\frac{1200\sqrt{3}+49}{1201\times 2} \lvert10\rangle 
-+ \frac{400\sqrt{3}-49}{1201\times 2} \left( \lvert00\rangle + \lvert01\rangle + \lvert11\rangle \right)
-$$  
+　　　　　　$$ \lvert\phi\rangle^{\prime}_{marked} = \frac{1200\sqrt{3}+49}{1201\times 2} \lvert10\rangle + \frac{400\sqrt{3}-49}{1201\times 2} \left( \lvert00\rangle + \lvert01\rangle + \lvert11\rangle \right) $$  
 <br />
-　　　　　　$$ \lvert\phi\rangle^{\prime}_{marked} = 
-\textstyle \class{mathfont-r}{0.8857 \cdots} \lvert10\rangle 
-+  0.2680 \cdots \left( \lvert00\rangle + \lvert01\rangle + \lvert11\rangle \right)
-$$  
+　　　　　　$$ \lvert\phi\rangle^{\prime}_{marked} = \textstyle \class{mathfont-r}{0.8857 \cdots} \lvert10\rangle +  0.2680 \cdots \left( \lvert00\rangle + \lvert01\rangle + \lvert11\rangle \right) $$  
 <br />
 　　　　　　操作後の $$ \lvert10\rangle $$ の確率は, $$ \left(0.8857 \cdots\right)^{2} \approx \textstyle \class{mathfont-r}{78.44 \%} $$
 <br />
@@ -199,9 +169,7 @@ $$ I = \left( \begin{array}{cc} 1 & 0 \\ 0 & 1 \end{array} \right) , Z = \left( 
 \frac{1}{\sqrt{2}} \left( \begin{array}{cc} H & H \\ H & -H \end{array} \right)
 $$
 
-　　　　　　$$ D \cdot CZ \lvert \phi \rangle = \frac{1}{4}\left(
-(-1 + 1 + 1 - 1) \cdot \lvert00\rangle + (1 - 1 + 1 - 1)  \cdot \lvert01\rangle
-+ (1 + 1 - 1 - 1) \cdot \lvert10\rangle + (1 + 1 + 1 + 1) \cdot \lvert11\rangle \right) $$
+　　　　　　$$ D \cdot CZ \lvert \phi \rangle = \frac{1}{4}\left( (-1 + 1 + 1 - 1) \cdot \lvert00\rangle + (1 - 1 + 1 - 1)  \cdot \lvert01\rangle + (1 + 1 - 1 - 1) \cdot \lvert10\rangle + (1 + 1 + 1 + 1) \cdot \lvert11\rangle \right) $$
 
 
 ここで, $$ Z = H \cdot X \cdot H $$ を使うと, $$ CZ = ( I \otimes H ) \cdot CX \cdot ( I \otimes H ) $$ と書けます.   
