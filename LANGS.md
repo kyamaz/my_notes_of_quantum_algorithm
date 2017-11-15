@@ -1,3 +1,3 @@
 # Languages
 
-* [Japanese](ja/)
+* [Japanese](./ja/)
