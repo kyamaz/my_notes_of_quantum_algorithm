@@ -1,0 +1,16 @@
+{
+  "styles": {
+    "website": "_website.css",
+    "pdf": "_pdf.css"
+  },
+  "plugins": 
+    [ "revealjs"
+    , "theme-api"
+    , "mathjax"
+    ],
+  "pluginsConfig": {
+    "theme-api": {
+      "theme": "dark"
+    }
+  }
+}
