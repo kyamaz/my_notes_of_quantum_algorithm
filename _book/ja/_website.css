@@ -1,0 +1,17 @@
+.book {
+  .book-body {
+    .page-wrapper {
+      .page-inner {
+        section.normal {
+          h1 {
+            font-size: 20px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.mathfont-r {
+  color: red;
+}
