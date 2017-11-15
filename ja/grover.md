@@ -333,3 +333,5 @@ sympy.physics.quantum パッケージをインポートします.
 >>> qapply( grover * qi)
 -|11>
 ```
+
+{% include mathjax.html %}

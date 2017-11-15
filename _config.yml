@@ -1,3 +1,8 @@
+katex-version: "0.8.3"
+# Build settings
+markdown: kramdown
+permalink: pretty
+
 kramdown:
   math_engine:         mathjax
   math_engine_opts:
