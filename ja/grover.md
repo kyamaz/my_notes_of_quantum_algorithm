@@ -303,4 +303,3 @@ sympy.physics.quantum パッケージをインポートします.
 ```
 
 
-{% include "mathjax.html" %}
