@@ -178,17 +178,17 @@ $$
 
 これを IBM Q 上で表現すると以下のようになります.  実行すると, $$ \lvert 11 \rangle $$ の確率が $$ 1 $$ となります.  
 
-![](../images/grover_search_3_on2qubit.png)
+![](grover/images/grover_search_3_on2qubit.png)
 
 次に 3-qubit の例は以下のようになります.  
 
 ＊ 3-qubit で $$ \lvert 111 \rangle $$ を $$ 1 $$ 回の試行を行なう例
 
-![](../images/grover_search_7_on3qubit_x1.png)
+![](grover/images/grover_search_7_on3qubit_x1.png)
 
 ＊ 3-qubit で $$ \lvert 111 \rangle $$ を $$ 2 $$ 回の試行を行なう例
 
-![](../images/grover_search_7_on3qubit_x2.png)
+![](grover/images/grover_search_7_on3qubit_x2.png)
 
 ### (Riggetti製) pyquil を使って検証
 
