@@ -169,6 +169,8 @@ $$ I = \left( \begin{array}{cc} 1 & 0 \\ 0 & 1 \end{array} \right) , Z = \left( 
 \frac{1}{\sqrt{2}} \left( \begin{array}{cc} H & H \\ H & -H \end{array} \right)
 $$
 
+> 最終的な右辺には, -1 が全体に掛かっています. これは, グローバル位相, または絶対位相 （global phase）と呼んでいます.  グローバル位相は, 測定段階で絶対値の二乗をとるため, 量子計算としては, +1 との区別ができません.  そのため, 一般的に無視しても良いとされています.  量子回路にする以降の例ではこの -1 は省略して検証を進めます.  
+
 　　　　　　$$ D \cdot CZ \lvert \phi \rangle = \frac{1}{4}\left( (-1 + 1 + 1 - 1) \cdot \lvert00\rangle + (1 - 1 + 1 - 1)  \cdot \lvert01\rangle + (1 + 1 - 1 - 1) \cdot \lvert10\rangle + (1 + 1 + 1 + 1) \cdot \lvert11\rangle \right) $$
 
 
@@ -180,6 +182,7 @@ $$
 
 ![](../images/grover_search_3_on2qubit.png)
 
+
 次に 3-qubit の例は以下のようになります.  
 
 ＊ 3-qubit で $$ \lvert 111 \rangle $$ を $$ 1 $$ 回の試行を行なう例
@@ -190,7 +193,51 @@ $$
 
 ![](../images/grover_search_7_on3qubit_x2.png)
 
-### (Riggetti製) pyquil を使って検証
+
+  **【補足】 手順２）の別解**
+
+> 手順２での行列の式の変換は, 執筆者の力では導出が難しく, 参考書のお手本を元にしております. 執筆者の行なった違う計算を次に記します. 
+
+　　$$ \displaystyle D = \frac{1}{2} \left( \begin{array}{cc} X-I & X+I \\ X+I & X-I \end{array} \right) $$  
+　　  
+　　この行列の固有値を $$ \lambda $$ とすると, 固有値を求める式は,   
+　　  
+　　$$ 4\lambda^2 - 4\left(X-I\right)\lambda + \left(X-I\right)^2 - \left(X+I\right)^2 = 0 $$  
+　　$$ 4\lambda^2 - 4\left(X-I\right)\lambda - 4 \cdot X = 0 $$  
+　　$$ \left(\lambda + I\right)\left(\lambda - X\right) = 0 $$  となり,  
+　　  
+　　固有値は, $$ \lambda = -I, X $$ . $$ \lambda = -I $$ の固有ベクトルは, 
+$$ \frac{1}{\sqrt{2}}\left( \begin{array}{cc} I  \\ -I \end{array} \right) $$ . 
+$$ \lambda = X $$ の固有ベクトルは, 
+$$ \frac{1}{\sqrt{2}}\left( \begin{array}{cc} I  \\ I \end{array} \right) $$ 
+です.  
+　　  
+　　ここで, 固有値ベクトルで作られる行列 
+　　$$ U = \frac{1}{\sqrt{2}} \left( \begin{array}{cc} I & I \\ I & -I \end{array} \right) $$ を考えると,  
+　　これは, $$ 2 \times 2 $$ 行列の Hadamard 演算子 $$ H $$ を使って, $$ H \otimes I $$ と表せます.  
+　　また, この $$ U $$ は, 逆行列も同じ行列 $$ U^{-1} = U $$ という特徴もあり, この性質を使って,  
+　　  
+　　$$ U^{-1}DU = \left( H \otimes I\right) \cdot D \cdot \left( H \otimes I \right) = \left( \begin{array}{cc} X & 0 \\ 0 & -I \end{array} \right) $$  
+　　が得られます.  
+　　  
+　　次に, 右辺の $$ \left( \begin{array}{cc} X & 0 \\ 0 & -I \end{array} \right) $$ の展開を考えてみます.  
+　　形が $$ CNOT = \left( \begin{array}{cc} I & 0 \\ 0 & X \end{array} \right) $$ に似ていますので, 単にこの２つをかけてみます.  
+
+　　$$ \left( \begin{array}{cc} X & 0 \\ 0 & -I \end{array} \right) \cdot \left( \begin{array}{cc} I & 0 \\ 0 & X \end{array} \right) = \left( \begin{array}{cc} X & 0 \\ 0 & -X \end{array} \right) = Z \otimes X $$
+　　  
+　　偶然にもうまく量子回路にできる形がでてきました. そこで, 両辺に, CNOT を掛けると次式が得られます.  
+
+　　$$ \left( \begin{array}{cc} X & 0 \\ 0 & -I \end{array} \right) = \left(Z \otimes X \right) \cdot CNOT $$
+　　  
+　　この式を使って, $$ U^{-1}DU $$ の左右から, $$ U = U^{-1} = H \otimes I $$ を掛けると, $$ D $$ を表す式が得られます.  
+
+　　$$ D = \left(H \otimes I \right) \cdot  \left(Z \otimes X \right) \cdot CNOT \cdot \left(H \otimes I \right) $$  
+　　  
+　　これを IBM Q 上で表現すると以下のようになります.   
+
+![](../images/grover_search_3_on2qubit_d.png)
+
+### (Rigetti製) pyquil を使って検証
 
 python環境に pyquil をインストールします.  
 
@@ -304,4 +351,14 @@ sympy.physics.quantum パッケージをインポートします.
 -|11>
 ```
 
+別解したグローバル位相が +1 のケースの用例も記します.  
 
+```python
+>>> from sympy.physics.quantum.gate import IdentityGate as I
+>>> qi = qapply(H(0)*H(1)*Qubit('00'))
+>>> rf_3 = H(0)*CNOT(1,0)*H(0)
+>>> d_2 = (H(1)*I(0))*(Z(1)*X(0))*CNOT(1,0)*(H(1)*I(0))   # 別解の行列
+>>> grover = d_2 * rf_3
+>>> qapply( grover * qi)
+|11>               # ←グローバル位相が正の値
+```
