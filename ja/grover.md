@@ -1,5 +1,20 @@
 # Grover アルゴリズムについて
 
+### はじめに TL; DR;
+このノートは, ある量子コンピューターの勉強会向けに作成したものです.  
+Qiita の [Advent Calendar 2017](https://qiita.com/advent-calendar/2017/quantum) の 12/1 のエントリ記事です. 
+
+|目次|内容|
+|:--|:--|
+|Grover アルゴリズムの概要|アルゴリズムの大まかな全容を説明してます. |
+|Grover's Search Algorithm の数理|アルゴリズムの数理的なお話しです. |
+|IBM Q を使って検証|IBMの量子コンピューター IBM Q を使った具体例です. |
+|(Rigetti製) pyquil を使って検証|量子コンピューターベンチャーのオープンソースライブラリを使った具体例です.|
+|書籍紹介|量子コンピューター関連の書籍紹介です.|
+|付録: sympy で <br />Grover アルゴリズムを計算してみましょう|pythonの sympy ライブラリを使った具体例です.|
+
+### Grover アルゴリズムの概要
+
 1996, Lov Grover, **"A fast quantum mechanical algorithm for database search"** [quant-ph/9605043](https://arxiv.org/abs/quant-ph/9605043)
 
 > Imagine a phone directory containing N names arranged in completely random order. In order to find someone's phone number with a 50% probability, any classical algorithm (whether deterministic or probabilistic) will need to look at a minimum of N/2 names. Quantum mechanical systems can be in a superposition of states and simultaneously examine multiple names. By properly adjusting the phases of various operations, successful computations reinforce each other while others interfere randomly. As a result, the desired phone number can be obtained in only O(sqrt(N)) steps. The algorithm is within a small constant factor of the fastest possible quantum mechanical algorithm. 
@@ -25,7 +40,6 @@ $$ x = \phi $$ の答え $$ f(\phi, \psi) $$ が $$ 0 $$ か, $$ 1 $$ かを判�
   のような $$ \psi $$ に, $$ \phi = \lvert0101\rangle $$ が, 含まれるかどうかを調べる問題がこのアルゴリズムの対象です.  
 
 
----
 それでは, Grover アルゴリズムの特徴をみていきましょう.  
 Grover アルゴリズムは, 振幅増幅手法と呼ばれる操作を行い, 目的の値 x を検出します.  
 
@@ -78,7 +92,6 @@ Grover アルゴリズムは, 振幅増幅手法と呼ばれる操作を行い, 
 　　　　　　操作後の $$ \lvert10\rangle $$ の確率は, $$ \left(0.8857 \cdots\right)^{2} \approx \textstyle \class{mathfont-r}{78.44 \%} $$
 <br />
 
----
 ### Grover's Search Algorithm の数理
 $$ f(x) := \begin{cases}
 1 & (x = z) \\
@@ -277,7 +290,6 @@ result = qvm.run(p,[0,0],20)
 print(result)
 ```
 
----
 ### Grover の応用
 
 * 複数の検索対象を同時に見つけ出すための探索 := G-BBHT
@@ -289,9 +301,8 @@ print(result)
 
   $$ \lvert i \rangle $$ の $$ i $$ が素数なら, $$ -1 $$ , 合成数なら $$ 1 $$ を返すようなオラクルを考える.  
 
----
 
-### 書籍紹介
+## 書籍紹介
 
 量子コンピューターを勉強するために, お薦めの図書を教えてほしいとよく質問されます.  
 今回, Grover アルゴリズムに関して, 市販されている書籍で調べてこの資料を記しました. 
@@ -362,3 +373,7 @@ sympy.physics.quantum パッケージをインポートします.
 >>> qapply( grover * qi)
 |11>               # ←グローバル位相が正の値
 ```
+### 更新記録
+2017/11/15 初版  
+2017/11/27 追記  
+2017/12/01 Advent Calendar 2017 の「はじめに」を追記  
