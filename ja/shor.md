@@ -219,46 +219,6 @@ $$ 4^x \pmod{15} $$ の回路
 <img src="../images/4_x_mod_15.png" width="480" />
 
 
-
-<!--
-### Shor アルゴリズム を実装する
-
-### (Rigetti製) pyquil を使って検証する
-
-python環境に pyquil をインストールします.  （ここでは, pyquil がインストールされていることを前提とします. ）
-
-```python
-import pyquil.quil as pq
-import pyquil.api as api
-from pyquil.gates import *
-qvm = api.SyncConnection()
-p = pq.Program()
-p.inst(
-  )
-result = qvm.run(p,[0,0],20)
-print(result)
-```
-
-### sympy を使って検証する
-
-python 製のライブラリ sympy でも簡単に検証ができます. （ここでは, sympy がインストールされていることを前提とします. ）
-まず, sympy.physics.quantum パッケージをインポートします.  
-
-```python
->>> from sympy.physics.quantum import *
->>> from sympy.physics.quantum.gate import X,Y,Z,H,T,S,CNOT,SWAP
->>> from sympy.physics.quantum.gate import IdentityGate as I
->>> from sympy.physics.quantum.qubit import Qubit
-```
-
-```python
->>> qi = qapply(H(0)*H(1)*Qubit('00'))
->>> shor = ...
->>> qapply( shor * qi)
-```
--->
-
-
 ### 量子フーリエ変換
 
 Shor のアルゴリズムを実装するには, 「量子フーリエ変換」とその逆変換である「逆量子フーリエ変換」が必要になります.  
