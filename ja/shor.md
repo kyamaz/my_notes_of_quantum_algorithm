@@ -118,31 +118,31 @@ $$
 Phase 1）  
 １つめの量子ビット列 $$ \lvert q_l \rangle $$ に, 同じ振幅の重ね合わせ状態を作ります.  
 
-　　$$ \displaystyle \ \ \ \ \ \ \ \ \
+　$$ \displaystyle \ \ \ \ \ \ \ \ \
    \lvert 0 \rangle \lvert 0 \rangle 
    \longrightarrow
    \frac{1}{\sqrt{n}}\sum_{a \le n} \lvert a \rangle \lvert 0 \rangle
-   $$
+$$
 
 Phase 2）  
 １つめの量子ビット列 $$ \lvert q_l \rangle $$ を入力として, 関数 $$ f(x) $$ の出力を, ２つめの量子ビット列 $$ \lvert q_m \rangle $$ へ写すようなユニタリー変換 $$ U_f $$ を行います.  
 
-　　$$ \displaystyle \ \ \ \ \ \ \ \ \
+　$$ \displaystyle \ \ \ \ \ \ \ \ \
    \frac{1}{\sqrt{n}}\sum_{a \le n} \lvert a \rangle \lvert 0 \rangle
    \longrightarrow
    \frac{1}{\sqrt{n}}\sum_{a \le n} \lvert a \rangle \lvert f(a) \rangle
-   $$
+$$
 
 　ここで操作されるユニタリー変換 $$ U_f $$ は, 重要で, 周期発見（位数発見ともいう）のためのオラクルです.  
 
 Phase 3）  
 ２つめの量子ビット列 $$ \lvert q_m \rangle $$ を計算基底で測定します. この結果, $$ z $$ が得られたとします.  
 
-　　$$ \displaystyle \ \ \ \ \ \ \ \ \
+　$$ \displaystyle \ \ \ \ \ \ \ \ \
    \frac{1}{\sqrt{n}}\sum_{a \le n} \lvert a \rangle \lvert f(a) \rangle
    \longrightarrow
    \frac{1}{\sqrt{n/ \class{mathfont-r}{T}}}\sum_{a : f(a)=z} \lvert a \rangle \lvert z \rangle 
-   $$
+$$
 
 　この測定結果は次のフェーズの結果には影響しないから, 測定した結果 $$ z $$ は利用しません.  
 　ここで, 隠された求めるべき周期 $$ T $$ が暗黙的に（式の上で）得られます.  
@@ -150,11 +150,11 @@ Phase 3）
 Phase 4）  
 １つめの量子ビット列 $$ \lvert q_l \rangle $$ に逆量子フーリエ変換 ( $$ QFT^{-1} $$ ) を作用させます. 
 
-　　$$ \displaystyle \ \ \ \ \ \ \ \ \
+　$$ \displaystyle \ \ \ \ \ \ \ \ \
    \frac{1}{\sqrt{n/ \class{mathfont-r}{T}}}\sum_{a : f(a)=z} \lvert a \rangle \lvert z \rangle 
    \longrightarrow
    \frac{1}{\sqrt{n/ \class{mathfont-r}{T}}} \frac{1}{\sqrt{n}} \sum_{k = 0}^{n-1} \sum_{a: f(a)=z} \omega^{ak} \lvert k \rangle \lvert z \rangle 
-   $$
+$$
 
    この状態から１つめの量子ビット列を計算基底で測定します.  すると, 結果として $$ N/T $$ の状態が１つ得られます.  
 
