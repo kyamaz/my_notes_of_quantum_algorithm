@@ -74,7 +74,7 @@ $$  \exists a \in \{ 2, 3, \cdots  , N-1 \} : gcd(a, N) = 1 $$ である $$ a $$
 $$ \exists a < 15 , gcd(a, 15 ) = 1 $$ である数 $$ a = 7 $$ をとって調べます.  
 ある量子状態 $$ \lvert \psi \rangle $$ を作って計算します. （具体的な計算方法と数理は後述）  
 
-$$ \\
+　$$ \\
 \ \ \ \lvert \psi \rangle = \lvert 0 \rangle \lvert 7^0 \pmod{15} \rangle + \lvert 1 \rangle \lvert 7^1 \pmod{15} \rangle \\
 \ \ \ \ \ \ \ \ \ + \lvert 2 \rangle \lvert 7^2 \pmod{15} \rangle + \lvert 3 \rangle \lvert 7^3 \pmod{15} \rangle \\
 \ \ \ \ \ \ \ \ \ + \lvert 4 \rangle \lvert 7^4 \pmod{15} \rangle + \cdots + \lvert N-1 \rangle \lvert 7^{N-1} \pmod{15} \rangle \\
@@ -82,7 +82,7 @@ $$
 
 この mod がある Ket部分を展開して,  
 
-$$ \\
+　$$ \\
 \ \ \ \lvert \psi \rangle = \lvert 0 \rangle \lvert 1 \rangle + \lvert 1 \rangle \lvert 7 \rangle \\
 \ \ \ \ \ \ \ \ \ + \lvert 2 \rangle \lvert 4 \rangle + \lvert 3 \rangle \lvert 13 \rangle \\
 \ \ \ \ \ \ \ \ \ + \lvert 4 \rangle \lvert 1 \rangle + \cdots + \lvert N-1 \rangle \lvert 7^{N-1} \pmod{15}\rangle \\
@@ -91,7 +91,7 @@ $$
 を計算する必要があります. しかし, 全てを計算して値を算出しなくても, その周期性がわかればよいのです.  
 つまりは, もう少し式の変形を進めると,  
 
-$$ \\
+　$$ \\
 \ \ \ \lvert \psi \rangle = ( \lvert 0 \rangle  + \lvert 4 \rangle + \lvert 8 \rangle + \cdots ) \lvert 1 \rangle \\
 \ \ \ \ \ \ \ \ \ + ( \lvert 1 \rangle  + \lvert 5 \rangle + \lvert 9 \rangle + \cdots ) \lvert 7 \rangle \\
 \ \ \ \ \ \ \ \ \ + ( \lvert 2 \rangle  + \lvert 6 \rangle + \lvert 10 \rangle + \cdots ) \lvert 4 \rangle \\
@@ -101,7 +101,7 @@ $$
 となり, 周期 $$ T = 4 $$ ということがわかります.  
 偶数の周期がみつかりましたので, あとは, $$ gcd ( a^{T/2} \pm １, N ) $$ を計算すればよく,  
 
-$$ gcd ( 7^2 \pm 1 , 15 ) =  \{ gcd(48, 15) = 3 $$ と $$ gcd(50, 15) = 5 \} $$  
+　$$ gcd ( 7^2 \pm 1 , 15 ) =  \{ gcd(48, 15) = 3 $$ と $$ gcd(50, 15) = 5 \} $$  
 
 が得られます.  
 
@@ -168,7 +168,7 @@ Phase 5）
 
 この手順を量子回路にできるように, 詳細に数式で辿ってみます.  
 
-$$ \\
+　$$ \\
 \displaystyle \lvert 0 \rangle \lvert 0 \rangle \xrightarrow{H \otimes I} \frac{1}{\sqrt{2^n}} \sum_{j=0}^{2^n-1} \lvert j \rangle \lvert 0 \rangle \\
 \displaystyle \xrightarrow{U_f} \frac{1}{\sqrt{2^n}} \sum_{j=0}^{2^n-1} \lvert j \rangle \lvert f(j) \rangle 
 \displaystyle = \frac{1}{\sqrt{2^n}} \sum_{a=0}^{T-1} \sum_{m=0}^{\frac{2^n}{T}-1} \lvert Tm+a \rangle \lvert f(Tm+a) \rangle \\
@@ -190,7 +190,7 @@ $$
 最後の $$ m $$ の総和は, $$ a $$ が $$ 2^n/T $$ で割り切れる $$ a = 2^n ( \frac{k}{T} ) $$ ときに, 1 になります.  
 そして,  
 
-$$ \\
+　$$ \\
 \displaystyle \sum_{m=0}^{\frac{2^n}{T}-1} \omega^{-Tam} = \begin{cases} 2^n/T & (a = 0 \mod{2^n/T}) \\ 0 & (a \ne 0 \mod{2^n/T}) \end{cases}
 $$
 
@@ -243,7 +243,7 @@ $$ 2 \times 2 $$ のHadamard変換行列 $$ H := \frac{1}{\sqrt{2}} \left( \begi
 $$ 2 \times 2 $$ の位相変換行列 $$ R_{x,y} := \left( \begin{array}{cc} 1 & 0 \\ 0 & e^{ \class{mathfont-r}{+} 2 \pi i / 2^{k} } \end{array} \right), 
 \ \ \ k = \bigl( x - y - 1 \bigr) $$ とした $$ R_{x,y} $$ の $$ n $$ 量子ビット上での制御演算子 $$ U_{x,y} $$ を使って, 次のように表されます.   
 
-$$ U^{(n)} = \Biggl[ \biggl( \underbrace{I \otimes \cdots \otimes I}_{n-1} \otimes H \biggr) U_{n-1,n} \cdots U_{1,n} \Biggr] \\
+　$$ U^{(n)} = \Biggl[ \biggl( \underbrace{I \otimes \cdots \otimes I}_{n-1} \otimes H \biggr) U_{n-1,n} \cdots U_{1,n} \Biggr] \\
 \ \ \ \ \ \ \ \times \Biggl[ \biggl( \underbrace{I \otimes \cdots \otimes I}_{n-2} \otimes H \otimes I \biggr) U_{n-2,n-1} \cdots U_{1,n-1} \Biggr] \\
 \ \ \ \ \ \ \ \times \Biggl[ \biggl( \underbrace{I \otimes \cdots \otimes I}_{n-3} \otimes H \otimes I \otimes I \biggr) U_{n-3,n-2} \cdots U_{1,n-2} \Biggr] \\
 \ \ \ \ \ \ \ \times \Biggl[ \biggl( \underbrace{I \otimes \cdots \otimes I}_{n-4} \otimes H \otimes \underbrace{I \otimes \cdots \otimes I}_{3} \biggr) U_{n-4,n-3} \cdots U_{1,n-3} \Biggr] \\
@@ -272,7 +272,7 @@ $$ \displaystyle \forall y \in S_n ,\ \ \ \  f (x) = \frac{1}{\sqrt{N}} \sum_{x=
 \ \ \ k = \bigl( x - y - 1 \bigr) $$ とした 
 $$ R^{\dagger}_{x,y} $$ の $$ n $$ 量子ビット上での制御演算子 $$ \tilde U_{x,y} $$ を使って, 次のように表されます.   
 
-$$ \tilde U^{(n)} = 
+　$$ \tilde U^{(n)} = 
 P \times \Biggl[ \biggl( H \otimes \underbrace{I \otimes \cdots \otimes I}_{n-1} \biggr) \Biggr] \\
 \ \ \ \ \ \ \ \times \Biggl[ \biggl( I \otimes H \otimes \underbrace{I \otimes \cdots \otimes I}_{n-2} \biggr) \tilde U_{1,2} \Biggr] \\
 \ \ \ \ \ \ \ \times \Biggl[ \biggl( I \otimes I \otimes H \otimes \underbrace{I \otimes \cdots \otimes I}_{n-3} \biggr) \tilde U_{2,3} \tilde U_{1,3} \Biggr] \\
