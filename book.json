@@ -4,8 +4,7 @@
     "pdf": "_pdf.css"
   },
   "plugins": 
-    [ "reveal"
-    , "theme-api"
+    [ "theme-api"
     , "mathjax"
     ],
   "pluginsConfig": {
