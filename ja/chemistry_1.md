@@ -2,9 +2,8 @@
          data-separator="^\n---\n$"
          data-separator-vertical="^\n~~~\n$"
          data-notes="^Note:"
-         data-charset="utf-8">
+         data-charset="utf-8" /></div></div>
 
-<p><br /></p>
 <script>
 Reveal.initialize();
 </script>
