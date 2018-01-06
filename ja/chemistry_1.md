@@ -4,9 +4,7 @@
          data-notes="^Note:"
          data-charset="utf-8">
 
-
-  
-
+<p><br /></p>
 <script>
 Reveal.initialize();
 </script>
