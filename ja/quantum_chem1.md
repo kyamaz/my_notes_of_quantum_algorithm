@@ -4,7 +4,7 @@
 量子化学計算では, 多原子系の分子を対象とした時間を含むシュレーディンガー方程式を解くことが重要です.  
 
 $$
-\hspace{-200px}\begin{align}
+\hspace{-100px}\begin{align}
 i\hbar \frac{\partial}{\partial t}\phi &= H \phi \tag{1}
 \end{align}
 $$
@@ -30,7 +30,7 @@ $$
 この Hamiltonian $$ H $$ は, 時間に依存しないため, 変数分離することができ,  
 
 $$
-\hspace{-200px}\begin{align}
+\hspace{-100px}\begin{align}
 \phi &= \psi(r, R) \cdot C \exp{\left(-i\frac{E}{\hbar}t\right)} \tag{3}\\
 \hat{H} \psi &= E\psi \tag{4}
 \end{align}
@@ -42,7 +42,7 @@ $$
 
 ### 初等量子化学計算の復習
 
-全原子系のシュレーディンガー方程式を解きたい. $$ = $$ Hamiltonian の固有値問題.  
+全原子系のシュレーディンガー方程式を解きたい. $$ = $$ Hamiltonian の**固有値問題**.  
 
 ２体問題は, 厳密解がある.  
 <img src="../images/1s.png" width="150" /><img src="../images/2p_x.png" width="150" /><img src="../images/2p_y.png" width="150" /><img src="../images/2p_z.png" width="150" />
@@ -53,20 +53,100 @@ $$
 
 * ３体問題 $$\;\;\longrightarrow$$ Born-Oppenheimer 近似[^2] を使った ほぼ厳密解
 * 多体問題 $$\;\;\longrightarrow$$ 摂動法[^3] （コンピューター登場以前の計算）  
-  　　　　 $$\;\;\longrightarrow$$ 変分法  
-
+  　　　　 $$\;\;\longrightarrow$$ 変分法  $$\;\;\longrightarrow$$ 密度汎関数法[^4][^5]  
 
 #### 変分法とは, 
 
 式(4) に左から$$ \psi^* $$ を掛けて全空間で積分した
-$$\hspace{-200px}\begin{align}
-\int \psi^* \hat{H} \psi dx – E \int \psi^* \psi dx = 0 \tag{5}
+
+$$\hspace{-100px}\begin{align}
+\langle \psi^* \vert \hat{H} \vert \psi \rangle – E \langle \psi^* \vert \psi \rangle = 0 \tag{5}
+\end{align}
+$$
+
+を考えます. $$ \psi $$ は規格化されているため, $$ \langle \psi^* \vert \psi \rangle = 1 $$ . すなわち, 
+
+$$\hspace{-100px}\begin{align}
+\langle \psi^* \vert \hat{H} \vert \psi \rangle = E \tag{6}
+\end{align}
+$$
+
+この方程式における固有値を $$ E_0, E_1, \dots $$ として, それぞれに対応する固有ベクトルを $$ \phi_0, \phi_1, \dots $$ とします.  
+$$ \phi_i $$ は規格直交性があり, $$ \psi $$ は, 次のように表せます.  
+
+$$\hspace{-100px}\begin{align}
+\psi = \sum_i a_i \phi_i  \tag{7}
+\end{align}
+$$
+
+この $$ \phi_i $$ を使って, 式 (6) は,  
+
+$$\hspace{-50px}\begin{align}
+E &= \langle \psi^* \vert \hat{H} \vert \psi \rangle \\
+&= a_0^* a_0 \langle \phi_0^* \vert \hat{H} \vert \phi_0 \rangle + a_1^* a_1 \langle \phi_1^* \vert \hat{H} \vert \phi_1 \rangle + a_2^* a_2 \langle \phi_2^* \vert \hat{H} \vert \phi_2 \rangle + \cdots \\
+&= a_0^* a_0 E_0 + a_1^* a_1 E_1 + a_2^* a_2 E_2 + \cdots \\
+\tag{8}
+\end{align}
+$$
+
+ここで, $$ E_0 \lt E_1 \lt E_2 \lt \cdots $$ であり, また, $$ a_i^* a_i \ge 0 $$ から,  
+
+$$\hspace{-100px}\begin{align}
+E &= \langle \psi^* \vert \hat{H} \vert \psi \rangle \ge \big( \sum_i a_i^* a_i \big) E_0 = E_0 \\
+\tag{9}
+\end{align}
+$$
+
+この式 (9) の等号が成立するように, $$ \psi $$ を $$ \phi_0 $$ に近づけられるようにすればよい. 式 (9) を「変分原理」といいます.   
+つまり, 式 (6) の左辺の最小値を求めることが, 固有値問題の第一歩となります. （**最小値問題, 最適化問題**）   
+
+次に, エネルギー $$ E $$ を波動関数 $$ \psi $$ の汎関数（関数の関数）と考えると, 
+
+$$\hspace{-100px}\begin{align}
+E(\psi) &= \frac{\langle \psi^* \vert \hat{H} \vert \psi \rangle}{\langle \psi^* \vert \psi \rangle} \\
+\tag{10}
+\end{align}
+$$
+
+次の変分方程式は, 元のシュレーディンガー方程式と等価であることが分かっています.  
+
+$$\hspace{-100px}\begin{align}
+\delta E(\psi) &= 0 \\
+\tag{11}
+\end{align}
+$$
+
+変分原理が正しいエネルギー固有値を与えるのは, 波動関数が真の波動関数である場合であり, 
+真の波動関数に近いほど, $$ E(\psi) $$ は正しいエネルギー固有値 $$ E $$ に近づきます. 
+しかし, 私たちは真の波動関数を知りません. 
+そこで, 未知のパラメータを含む適当な有限ヒルベルト空間で波動関数を表現するような関数を仮定します. 
+この仮定した関数を, 試行関数（trial function）と呼びます.  
+
+
+#### Hartree-Fock 法とは, 
+
+Hartree-Fock 法は, 変分法の具体的な方式です.  
+多電子系を表す Hamiltonian の固有関数（波動関数）を一個のスレーター行列式で近似（ハートリー・フォック（Hartree-Fock）近似）できると仮定した場合に, 
+問題の Hamiltonian を次の Hartree-Fock 方程式として, 解を求める方式です.  
+
+$$\begin{align}
+- \frac{1}{2m} \nabla^2 \varphi_i(x) + V_H(x)\varphi_i(x) - \int dy V_E(x,y)\varphi_i(y) = \epsilon_i \varphi_i(x) \tag{5}\\
 \end{align}
 $$
 
 
+このハートリー・フォック法の問題は, 多電子系の記述をたった一つのスレーター行列式で表したことに課題があり, 
+ポスト・ハートリー・フォック法として, 次のような手法が登場して用いられています.  
 
-ハートリー・フォック（Hartree-Fock）近似
+* 配置間相互作用法（configuration interaction method, CI法）  
+  多電子系における Born-Oppenheimer 近似のもとで非相対論的シュレーディンガー方程式を解くために用いられる線形変分的なポスト・ハートリー・フォック法  
+
+* メラー＝プレセット法（Møller - Plesset method）  
+  レイリー・シュレーディンガーの摂動論を用いて電子相関を考慮する方法  
+
+* 結合クラスター法（Coupled Cluster, CC法）  
+  ハートリー・フォック分子軌道法を基本にして, 電子相関を考慮する指数関数クラスター演算子を使って多電子波動関数を構成する  
+
 
 ### トレンド : 量子コンピューターを利用する
 
@@ -241,7 +321,7 @@ QISKit を使った量子化学計算が提案されています. 手法論や�
 [arxiv:1711.04789 Quantum Simulation of Electronic Structure with Linear Depth and Connectivity](https://arxiv.org/abs/1711.04789)  
 [arxiv:1801.01053 Low-depth circuit ansatz for preparing correlated fermionic states on a quantum computer](https://arxiv.org/abs/1801.01053)  
 
-* 今後, 量子回路だけを扱う研究論文も増えるであろう.  
+* 今後, 量子回路だけを扱う研究論文もでてくるでしょう.  
 
 #### 量子化学計算分野における量子コンピューター利用の今後
 
@@ -275,3 +355,10 @@ $$
     \end{align}
 $$
 
+[^4]: $$\begin{align}
+    & \textrm{解きたいシュレーディンガー方程式が, コーン・シャム（KS, Kohn-Sham）方程式と呼ばれる次の方程式です.} \\ 
+    & \left[ - \nabla^2 + V_{ion}(r) + V_H(r) + V_{xc}^{\sigma} \right] \varphi_{i\sigma}(r) = \epsilon_{i\sigma} \varphi_{i\sigma}(r) \\
+    \end{align}
+$$
+
+[^5]: 密度汎関数理論は, Hohenberg-Kohn の定理をもとにしております. この定理は, 変分原理を電子密度ρについて発展させた「 Hohenberg-Kohn の第 2 定理」と, ある系の基底状態の電子密度ρが決まると, それを基底状態にもつ外部ポテンシャルがもし存在すればそれはただ１通りに定まるという 「 Hohenberg-Kohn の第 1 定理」からなります.  
