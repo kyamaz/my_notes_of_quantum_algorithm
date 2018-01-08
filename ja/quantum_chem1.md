@@ -252,7 +252,7 @@ QISKit を使った量子化学計算が提案されています. 手法論や�
 
 ---
 
-[^1]: $$ \hspace{-150px}\begin{align}
+[^1]: $$ \begin{align}
   & \hbar, e, m_e \textrm{の物理定数を} 1 ( 4\pi \epsilon_0  \textrm{も} 1) \textrm{とするハートリー原子単位系 } \\
   & 1 E_h \,= \frac{e^2}{a_0} \;(\overset{hartree}{=} 1 \left[hartree\right]),\quad\quad \big( a_0 = \frac{\hbar^2}{m_e e^2} \;(\overset{hartree}{=} 1 \left[a.u.\right]) \big) 
   \end{align}
@@ -260,7 +260,7 @@ QISKit を使った量子化学計算が提案されています. 手法論や�
 
 [^2]: 原子核の質量が, 電子のそれに比べて非常に大きいことを利用した近似
 
-[^3]: $$ \hspace{-150px}\begin{align}
+[^3]: $$ \begin{align}
   & \textrm{解きたい問題の Hamiltonian}\; H \textrm{が, } \\
   & H = H_0 + V \\
   & \textrm{と書かれ, }  H_0 \textrm{については解かれている. すなわち, } \\
