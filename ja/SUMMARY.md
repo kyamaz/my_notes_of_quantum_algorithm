@@ -4,4 +4,4 @@
   * [Grover](grover.md)
   * [Shor](shor.md)
 
-  * [Qunatum Chemistry](qunatum_chem1.md)
+  * [Quantum Chemistry](quantum_chem1.md)
