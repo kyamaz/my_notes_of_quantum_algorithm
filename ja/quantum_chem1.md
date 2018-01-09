@@ -176,7 +176,7 @@ $$\hspace{50px}\begin{align}\textrm{Classical Preparation} & \begin{cases}
 \end{align}
 $$
 
-<img src="../images/arxiv_1208_5986_fig1.png" width="420"/><img src="../images/arxiv_1712_00446_fig1.png" width="270"/>
+<img src="../images/arxiv_1208_5986_fig1.png" width="420" alt="arxiv_1208_5986_fig1"/><img src="../images/arxiv_1712_00446_fig1.png" width="270" alt="arxiv_1712_00446_fig1"/>
 
 ### Hamiltonian を量子コンピューターに投入できる形にする
 
@@ -231,7 +231,7 @@ $$
 [arxiv:1405.2696 Quantum Simulation of Helium Hydride in a Solid-State Spin Register](https://arxiv.org/abs/1405.2696)  
 
 
-<img src="../images/arxiv_1704_05018_fig3.png" width="600"/>
+<img src="../images/arxiv_1704_05018_fig3.png" width="600" alt="arxiv_1704_05018_fig3"/>
 
 ### 量子化学計算分野における巨人たちのアプローチ
 
