@@ -158,11 +158,15 @@ $$\hspace{50px}\begin{align}\textrm{Classical Preparation} & \begin{cases}
 & \downarrow \\
 & \textrm{Born-Oppenheimer Approximation} \\
 & \downarrow \\
-& \textrm{Compute Orbitals, Hartree-Fock State} \\
+& \textrm{Compute Orbitals} \\
+& \quad\quad \textrm{Hartree-Fock Approximation} \\
+& \quad\quad \textrm{Bogoliubov transformation} \\
 & \downarrow \\
 & \textrm{Write in Second Quantized Orbital Basis} \\
 & \downarrow \\
-& \textrm{Bravyi-Kitaev Transform} \\
+& \textrm{Transform electronic Hamiltonian to qubit Hamiltonian} \\
+& \quad\quad \textrm{Bravyi-Kitaev Transform:} \mathcal{O}(\log{n}) qubits \\
+& \quad\quad \textrm{Jordan-Wigner Transform:} \mathcal{O}(n) qubits \\
 \end{cases} \\
 & \downarrow \\
 & \textbf{Quantum Calculation} \begin{cases}
@@ -171,6 +175,16 @@ $$\hspace{50px}\begin{align}\textrm{Classical Preparation} & \begin{cases}
 \end{cases}
 \end{align}
 $$
+
+<img src="../images/arxiv_1208_5986_fig1.png" width="420"/><img src="../images/arxiv_1712_00446_fig1.png" width="270"/>
+
+### Hamiltonian を量子コンピューターに投入できる形にする
+
+[TBD] Bravyi-Kitaev Transform について詳しく
+
+### 制御ユニタリー（Controlled Unitrary）
+
+[TBD] Phase Estimation Algorithm について詳しく
 
 
 ### 論文を読むときの Keyword (1)
@@ -182,7 +196,7 @@ $$
 |VQE(QVEとも)| Variational Quantum Eigensolver, 量子固有値変分法<br/>|
 |PEA|Pahse Estimation Algorithm, 位相推定アルゴリズム<br/>|
 |STO-3G||
-|UCC||
+|UCC|Unitary Coupled Cluster<br/>|
 |RDM|reduced density matrix<br/>|
 
 
@@ -191,42 +205,79 @@ $$
 |Keyword|Description|
 |:--|:--|
 |Hartree|エネルギーの単位[^1]<br/>ボーア半径の距離を隔てた2つの電荷素量が持つポテンシャルエネルギー|
+|ボゴリューボフ変換|Bogoliubov transformation<br/>正準交換関係代数（または正準反交換関係代数））の或るユニタリ表現から他のユニタリ表現への交換関係代数の同型により引き起されるユニタリ変換. |
 |SCF法|Self Consistent Field 法<br/>Hartree-Fock方程式（Hamilton方程式の一種）から得られた近似解を使って, 再帰的に解く手法. これにより多粒子系のフェルミ粒子全体の作る平均場において, その中で運動する１つのフェルミ粒子の波動関数を自己無撞着（Self Consistent）に決定することができる.|
 
 
 ### どんな分子における研究段階か？
 
-現時点では, 次のような小さな分子系でしか研究が進んでいないのが実情.  
+現時点では, 次のような小さな分子系でしか研究が成果が提示されていないのが実情.  
 
-$$H_2$$
+* $$ H_2$$
 
 量子コンピューターの実例（ライブラリの利用用途を示すためのサンプル）も多く提示されてきている.  
 
-$$LiH$$
+* $$ LiH $$
 
 [arxiv:quant-ph/0604193 Simulated Quantum Computation of Molecular Energies](https://arxiv.org/abs/quant-ph/0604193)  
 [arxiv:1704.05018 Hardware-efficient Variational Quantum Eigensolver for Small Molecules and Quantum Magnets](https://arxiv.org/abs/1704.05018)  
 
-$$BeH_2$$
+* $$ BeH_2 $$
 
 [arxiv:1507.08969  Towards Practical Quantum Variational Algorithms](https://arxiv.org/abs/1507.08969)  
 
-$$HeH^{+}$$
+* $$ HeH^{+}$$
 
 [arxiv:1405.2696 Quantum Simulation of Helium Hydride in a Solid-State Spin Register](https://arxiv.org/abs/1405.2696)  
 
 
-### Hamiltonian を量子コンピューターに投入できる形にする
-
-### 制御ユニタリー（Controlled Unitrary）
+<img src="../images/arxiv_1704_05018_fig3.png" width="600"/>
 
 ### 量子化学計算分野における巨人たちのアプローチ
+
+[TBD] 絵を描く
 
 
 ### OpenFermion の利用
 
-### OpenFermion パッケージ群
+[arxiv:1710.07629](https://arxiv.org/abs/1710.07629) より,   
 
+```
+物性化学や材料化学における量子シミュレーションは, 直近のエラー耐性の量子デバイスの利用分野では, 重要な用途であると予測されています. 
+しかし, 現時点では, これらの問題のアルゴリズムの開発と研究は, 化学領域と量子アルゴリズムの両方で必要とされる知識が非常に多いため, 困難な領域です. 
+このギャップを埋め, より多くの研究者にフィールドを広げるために, OpenFermionソフトウェアパッケージ（www.openfermion.org）を開発しました.
+
+OpenFermionは、量子ソフトウェア上でのフェルミニックモデルと量子化学問題のシミュレーションを可能にすることを目的として開発された 
+Apache 2.0 ライセンスのもとでPythonで主に書かれたオープンソースのソフトウェアライブラリです. 
+
+一般的な電子構造パッケージとのインタフェースから始めて, 量子コンピューター上の電子構造問題を解決または研究するための分子構造と
+量子回路との間の変換を簡素化し, この領域を研究するために必要な専門知識の量を最小限に抑えるように作られています. 
+
+このパッケージは, ドキュメント化やテストで高いソフトウェア標準を維持しながら, 拡張性と堅牢性を備えて設計されています. 
+このリリース・ペーパーは, OpenFermionの設計選択の背後にある主な動機を概説し, OpenFermionの基本的な機能について議論します.  
+```
+
+量子化学計算のためのライブラリですから, 量子コンピューターの実機やシミュレーターを利用する部分は, プラグインを利用するように設計されています.  
+
+**問題の量子計算（Hamiltonian）**  
+↓  
+**OpenFermion による Hamiltoian の変換（＝Qubitで表されたHamiltoianやOperatorに）**   
+↓  
+**実機で計算（plugin を利用する）**   
+
+$$
+\hspace{-50px}\begin{align} & \textrm{plugins} \begin{cases}
+\textrm{pyQuil}   &\longrightarrow \textrm{Rigetti Forest-API} \\
+\textrm{ProjectQ} &\longrightarrow \textrm{ProjectQ simulator} \\
+\end{cases} \\
+& \textrm{output quantum circuit; OpenQASM} \longrightarrow \textrm{IBM Q} \\
+\end{align}
+$$
+
+
+
+### OpenFermion パッケージ群
+[TBD] 
 ops :
 
 hamiltonian : 
@@ -241,7 +292,7 @@ data :
 
 
 #### OpenFermion - ops
-
+[TBD] 
 * FermionOperator
 
 * QubitOperator
@@ -250,11 +301,11 @@ data :
 
 
 #### OpenFermion - hamiltonian
-
+[TBD] 
 #### OpenFermion - measurements
-
+[TBD] 
 #### OpenFermion - transform
-
+[TBD] 
 * Bravyi-Kitaev Super facst transform
 
 * Jordan-Wigner tranform
@@ -265,7 +316,7 @@ data :
 
 
 #### OpenFermion - utils / data
-
+[TBD] 
 * Grid
 
 * unitray_cc 群
@@ -283,8 +334,6 @@ Microsft は, 早い段階から LiQi|> の開発も含め Google からは先�
 * krosuke1001 さんのQiitaブログ記事 [Microsoft Qunatum Simulator を触ってみた　#2](https://qiita.com/krosuke1001/items/4cd826d28ae4d145e526)
 
 * GitHub にあるサンプル・プログラム[https://github.com/Microsoft/Quantum/tree/master/Samples/H2SimulationCmdLine](https://github.com/Microsoft/Quantum/tree/master/Samples/H2SimulationCmdLine)
-
-
 
 
 #### QISKit の利用
