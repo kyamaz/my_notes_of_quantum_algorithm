@@ -292,7 +292,13 @@ The optimizer then generates a new set of control parameters that create a new t
 
 ### 量子化学計算分野における巨人たちのアプローチ
 
-[TBD] 絵を描く
+* IBM : QISKit の利用を推進
+
+* Microsoft : Q# をリリース
+
+* Google : OpenFermion を提供
+
+<img src="../images/big3_chemistry.png" width="600" alt="[Big3 Chemistry]"/>
 
 
 ### OpenFermion の利用
