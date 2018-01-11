@@ -238,7 +238,7 @@ $$
 となり, 固有値ベクトル $$ \lvert u \rangle $$ も固有値 $$ \lambda $$ も, ユニタリー変換 $$ U $$ も不明でも, その位相 $$ \phi $$ を $$ n $$ ビットの精度で推定するアルゴリズムです.  
 その際には, 量子フーリエ変換（QFT, Quantum Fourier Transform）と, 制御ユニタリー（Controlled Unitary）操作が重要な役割を担います.  
 
-<img src="../images/phase_estimate_gate.png" width="800" alt="Phase Estimate Gate"/>
+<img src="../images/phase_estimate_gate.png" width="600" alt="Phase Estimate Gate"/><img src="../images/fourier_circuit.png" width="600" alt="Fourier Circuit"/>
 
 ### 量子変分法による固有値計算（Variational Quantum Eigensolver）
 
@@ -299,20 +299,18 @@ The optimizer then generates a new set of control parameters that create a new t
 
 [arxiv:1710.07629](https://arxiv.org/abs/1710.07629) より,   
 
-```
-物性化学や材料化学における量子シミュレーションは, 直近のエラー耐性の量子デバイスの利用分野では, 重要な用途であると予測されています. 
-しかし, 現時点では, これらの問題のアルゴリズムの開発と研究は, 化学領域と量子アルゴリズムの両方で必要とされる知識が非常に多いため, 困難な領域です. 
-このギャップを埋め, より多くの研究者にフィールドを広げるために, OpenFermionソフトウェアパッケージ（www.openfermion.org）を開発しました.
-
-OpenFermionは、量子ソフトウェア上でのフェルミニックモデルと量子化学問題のシミュレーションを可能にすることを目的として開発された 
-Apache 2.0 ライセンスのもとでPythonで主に書かれたオープンソースのソフトウェアライブラリです. 
-
-一般的な電子構造パッケージとのインタフェースから始めて, 量子コンピューター上の電子構造問題を解決または研究するための分子構造と
-量子回路との間の変換を簡素化し, この領域を研究するために必要な専門知識の量を最小限に抑えるように作られています. 
-
-このパッケージは, ドキュメント化やテストで高いソフトウェア標準を維持しながら, 拡張性と堅牢性を備えて設計されています. 
-このリリース・ペーパーは, OpenFermionの設計選択の背後にある主な動機を概説し, OpenFermionの基本的な機能について議論します.  
-```
+> 物性化学や材料化学における量子シミュレーションは, 直近のエラー耐性の量子デバイスの利用分野では, 重要な用途であると予測されています. 
+> しかし, 現時点では, これらの問題のアルゴリズムの開発と研究は, 化学領域と量子アルゴリズムの両方で必要とされる知識が非常に多いため, 困難な領域です. 
+> このギャップを埋め, より多くの研究者にフィールドを広げるために, OpenFermionソフトウェアパッケージ（www.openfermion.org）を開発しました.
+> 
+> OpenFermionは、量子ソフトウェア上でのフェルミニックモデルと量子化学問題のシミュレーションを可能にすることを目的として開発された 
+> Apache 2.0 ライセンスのもとでPythonで主に書かれたオープンソースのソフトウェアライブラリです. 
+> 
+> 一般的な電子構造パッケージとのインタフェースから始めて, 量子コンピューター上の電子構造問題を解決または研究するための分子構造と
+> 量子回路との間の変換を簡素化し, この領域を研究するために必要な専門知識の量を最小限に抑えるように作られています. 
+> 
+> このパッケージは, ドキュメント化やテストで高いソフトウェア標準を維持しながら, 拡張性と堅牢性を備えて設計されています. 
+> このリリース・ペーパーは, OpenFermionの設計選択の背後にある主な動機を概説し, OpenFermionの基本的な機能について議論します.  
 
 量子化学計算のためのライブラリですから, 量子コンピューターの実機やシミュレーターを利用する部分は, プラグインを利用するように設計されています.  
 
@@ -336,26 +334,64 @@ $$
 
 ### OpenFermion パッケージ群
 
-**ops** : Hamiltonian を表すためのデータ構造を提供. 生成・消滅演算子（つまりは複素行列）を定義しています.   
+```
+ops : Hamiltonian を表すためのデータ構造を提供. 生成・消滅演算子（つまりは複素行列）を定義しています.   
 
-**hamiltonian** : 化学計算に有用な Hamiltonian が提供されています.  
+hamiltonian : 化学計算に有用な Hamiltonian が提供されています.  
 
-**transform** : 電子系の Hamiltonian を量子ビット系の Hamiltonian に変換するための機能が提供されています.  
+transform : 電子系の Hamiltonian を量子ビット系の Hamiltonian に変換するための機能が提供されています.  
 
-**measurements** : 
+measurements : RDM制約条件を使った reduce operator を提供します.  
 
-**utils** : ユーテリティとしてのツール群.  
+utils : ユーテリティとしてのツール群.  
 
-**data** : STO-3G の数値データが HDF5フォーマットで提供されています.  
-
+data : STO-3G の数値データが HDF5フォーマットで提供されています.  
+```
 
 #### OpenFermion - ops
 
 * FermionOperator
 
+  FermionOperator は, Fermion Ladder 演算子を格納します.  
+  FermionOperator('1^') は, $$ a_1^{\dagger} $$ , FermionOperator('0')は, $$ a_0 $$ を表します. 
+  
+  $$\begin{align}
+  \textrm{''}\rightarrow \mathbb{1}\quad \textrm{'2'}\rightarrow a_2\quad \textrm{'4^ 9'}\rightarrow a_4^{\dagger} a_9\quad \textrm{'4^ 3 9 3^'}\rightarrow a_4^{\dagger} a_3 a_9 a_3^{\dagger}
+  \end{align}
+  $$
+
+```
+O_1 = FermionOperator('')
+O_2 = FermionOperator('2')
+O_3 = FermionOperator('4^ 9')
+O_4 = FermionOperarot('4^ 3 9 3^')
+```
+
 * QubitOperator
 
+  QubitOperator は, Pauli Spin 演算子を格納します.  
+
+  例えば, 次のような演算子を QubitOperator を使って以下のように表します.  
+
+  $$\begin{align}
+  O = Z_1 Z_2 + X_1 + X_2
+  \end{align}
+  $$
+
+
+```
+O = QubitOperator('Z1 Z2') + QubitOperator('X1') + QubitOperator('X2')
+```
+
 * InteractionOperator
+
+  分子を計算するために２体の相互作用を表す Hamiltonian. 
+
+  $$\begin{align}
+   constant + \sum_{p, q} h_{[p, q]} a^{\dagger}_p a_q +
+   \sum_{p, q, r, s} h_{[p, q, r, s]} a^{\dagger}_p a^{\dagger}_q a_r a_s.
+  \end{align}
+  $$
 
 
 #### OpenFermion - hamiltonian
@@ -368,7 +404,7 @@ $$
 
 * Hubbard Model
 
-  Fermi_hubbard 関数. Fermi-Hubbard Hamiltonian を表現します.  
+  Fermi_hubbard 関数. Fermi-Hubbard Hamiltonian を表します.  
 
 * Plane Wave Hamiltonian
 
@@ -378,9 +414,30 @@ $$
 
   jordan_wigner_dual_basis_hamiltonian 関数. QubitOperatoer としての Hamiltonian を扱えます.  
 
+* Mean Field Hamiltonian
+
+  mean_field_dwave 関数. BCS mean-field d-wave Hamiltonian を表します.  
+  $$
+    H = - t \sum_{\langle i,j \\rangle} \sum_\sigma
+            (a^\dagger_{i, \sigma} a_{j, \sigma} +
+             a^\dagger_{j, \sigma} a_{i, \sigma})
+        - \sum_{\langle i,j \\rangle} \Delta_{ij}
+          (a^\dagger_{i, \\uparrow} a^\dagger_{j, \downarrow} -
+           a^\dagger_{i, \downarrow} a^\dagger_{j, \\uparrow} +
+           a_{j, \downarrow} a_{i, \\uparrow} -
+           a_{j, \\uparrow} a_{i, \downarrow})
+  $$
 
 #### OpenFermion - measurements
-[TBD] 
+
+* one_body_fermion_constraints
+
+  Generates one-body positivity constraints on fermionic RDMs.
+
+* two_body_fermion_constraints
+
+  Generates two-body positivity constraints on fermionic RDMs.
+
 #### OpenFermion - transform
 
 * Bravyi-Kitaev (Super fast) transform
@@ -407,11 +464,30 @@ $$
 
 
 #### OpenFermion - utils / data
-[TBD] 
+
 * Grid
 
-* unitray_cc 群
+  原子の位置を表現するための 多次元のグリットとその点（位置）.  
 
+* Trotter 関数群
+
+  トロッター展開を支援するツール群.  
+
+* UCCSD 演算子関連
+
+  UCCSDを操作するための関数群.  
+  例）uccsd_generator(FermionOperator): UCCSD波動関数を生成するための非エルミート演算子. 
+
+
+### OpenFermion のサンプル
+
+[OpenFermion/examples/openfermion_demo.ipynb](https://github.com/quantumlib/OpenFermion/blob/master/examples/openfermion_demo.ipynb)
+
+[OpenFermion Tutorial Examples](http://openfermion.readthedocs.io/en/latest/examples.html)
+
+[OpenFermion Manual (PDF)](https://media.readthedocs.org/pdf/openfermion/latest/openfermion.pdf)
+
+  ※このPDFにあるサンプルプログラムを python のファイルにしてあります. [X}(https://github.com/kyamaz/my_notes_of_quantum_algorithm/tree/master/ja/sample/openfermion) 
 
 ### Microsoft と IBM の取り組み
 #### Q# の利用
