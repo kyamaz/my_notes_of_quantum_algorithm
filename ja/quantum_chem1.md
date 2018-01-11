@@ -434,6 +434,8 @@ O = QubitOperator('Z1 Z2') + QubitOperator('X1') + QubitOperator('X2')
            a_{j, \uparrow} a_{i, \downarrow})
   $$
 
+  ※「D-Waveとは関係なく, 高温超電導の理論で見ることができるd波超電導に関するもの」と @candidusflumen さんにご指摘いただきました. 
+
 #### OpenFermion - measurements
 
 * one_body_fermion_constraints
