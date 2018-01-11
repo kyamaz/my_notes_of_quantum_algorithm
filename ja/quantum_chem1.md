@@ -218,9 +218,21 @@ $$
 
 ### 量子変分法による固有値計算（Variational Quantum Eigensolver）
 
+1. Transform the Hamiltonian of the molecule to a qubit Hamiltonian.   
+2. Pick a “trial wavefunction,” or trial state, and encode it onto the quantum computer.   
+3. Estimate the energy of the trial state. This is done by measuring aspects of the quantum state you created in the previous step.    
+4. Feed this energy to an optimizer that is run on a classical computer.
+The optimizer then generates a new set of control parameters that create a new trial wavefunction on the quantum computer with lower energy.
+5. Repeat steps 2-4 for Hamiltonians corresponding to different inter-atomic spacings.   
+
+[IBM Blogより](https://developer.ibm.com/dwblog/2017/quantum-computing-qubit-vqe-variational-quantum-eigensolver/)
+
 ### 制御ユニタリー（Controlled Unitrary）
 
 [TBD] Phase Estimation Algorithm について詳しく
+
+
+<img src="../images/quantum_computer_for_chem.png" width="800" alt="[quantum computer for chemistry"/>
 
 
 ### 論文を読むときの Keyword (1)
@@ -231,7 +243,7 @@ $$
 |:--|:--|
 |VQE(QVEとも)| Variational Quantum Eigensolver, 量子固有値変分法<br/>|
 |PEA|Pahse Estimation Algorithm, 位相推定アルゴリズム<br/>|
-|STO-3G||
+|STO-3G|[TBD]|
 |UCC|Unitary Coupled Cluster<br/>|
 |RDM|reduced density matrix<br/>|
 
@@ -375,19 +387,6 @@ Microsft は, 早い段階から LiQi|> の開発も含め Google からは先�
 
 QISKit を使った量子化学計算が提案されています. 手法論や関連論文がブログで紹介されています.  
 [The Variational Quantum Eigensolver: An unsung hero of approximate quantum computing](https://developer.ibm.com/dwblog/2017/quantum-computing-qubit-vqe-variational-quantum-eigensolver/)
-
-> Here’s what it looks like to use VQE to calculate bond length in a molecule (e.g. BeH2) using a quantum computer:  
->  
-> 1. Transform the Hamiltonian of the molecule to a qubit Hamiltonian. This means taking your representation of the electronic orbital interactions in the molecule and figuring out how to mimic key parts of it in the qubit system. Qualitatively, you can think of the interactions among electronic orbitals in the molecules as being captured by our ability to create entanglement in the qubit system. The larger the molecule you are trying to simulate, the more electronic orbitals you have, so the more qubits you need.
->
-> 2. Pick a “trial wavefunction,” or trial state, and encode it onto the quantum computer. Imagine that this trial state is a guess to the electronic configuration (since you don’t know the answer for the real molecule yet) of BeH2 at a given inter-atomic distance. Create a quantum state on the processor that represents that particular version of the BeH2 wavefunction by using a combination of entangling gates, single-qubit gates, and your choice of circuit depth (the number of sequential operations you can do, constrained by the available hardware).
->
->3. Estimate the energy of the trial state. This is done by measuring aspects of the quantum state you created in the previous step. Given what you know about the molecule’s Hamiltonian, you can relate this back to an energy in the molecule for that given electronic configuration.  
->
->4. Feed this energy to an optimizer that is run on a classical computer. The optimizer then generates a new set of control parameters that create a new trial wavefunction on the quantum computer with lower energy. Rinse and repeat until the energy converges to the lowest value; this final energy corresponds to the solution to the ground state energy for the interatomic spacing you tried. (In the case of BeH2, the molecule is small enough to compare against results on a conventional computer.)
->
->5. Repeat steps 2-4 for Hamiltonians corresponding to different inter-atomic spacings. The Hamiltonian with the least energy would then correspond to the equilibrium configuration, and voila! You know the bond length.
->The ability to use a quantum computer to perform tasks that are typically hard for classical computers (like creating a trial state and measuring its energy), is an important part of why this approach is so promising. Of course, it’s early days and there are many hurdles to overcome, but, it’s an exciting start and we expect this approach will scale.
 
 実際の実例も提示されています. 
 [VQE algorithm: Application to quantum chemistry](https://github.com/QISKit/qiskit-tutorial/blob/master/4_applications/quantum_chemistry.ipynb)
