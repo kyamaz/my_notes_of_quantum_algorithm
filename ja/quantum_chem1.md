@@ -170,13 +170,24 @@ $$\hspace{50px}\begin{align}\textrm{Classical Preparation} & \begin{cases}
 \end{cases} \\
 & \downarrow \\
 & \textbf{Quantum Calculation} \begin{cases}
-& \textbf{Pahse Estimation Algorithm (PEA)} \\
 & \textbf{Variational Quantum Eigensolver (VQE)} \\
+& \textbf{Pahse Estimation Algorithm (PEA)} \\
 \end{cases}
 \end{align}
 $$
 
 <img src="../images/arxiv_1208_5986_fig1.png" width="640" alt="[arxiv_1208_5986_fig1]"/><img src="../images/arxiv_1712_00446_fig1.png" width="400" alt="[arxiv_1712_00446_fig1]"/>
+
+### 論文を読むときの Keyword (1)
+
+論文にある化学計算における用語に関する知識が必要となります. その用語を一部列挙します. （専門外向け）
+
+|Keyword|Description|
+|:--|:--|
+|VQE(QVEとも)| Variational Quantum Eigensolver, 量子固有値変分法<br/>|
+|PEA|Pahse Estimation Algorithm, 位相推定アルゴリズム<br/>|
+|UCC|Unitary Coupled Cluster<br/>|
+|RDM|reduced density matrix<br/>|
 
 ### Hamiltonian を量子コンピューターに投入できる形にする
 
@@ -216,6 +227,19 @@ $$
 \end{align}\tag{15}
 $$
 
+### 制御ユニタリー（Controlled Unitrary）
+
+量子化学計算で使われる Phase Estimation Algorithm （位相推定アルゴリズム）は, 通常の量子情報の教科書にある位相推定です.  
+固有ベクトル $$ \lvert u \rangle $$ とその固有値 $$ \lambda = \exp^{2 \pi i \phi} ( 0 \lt \phi \lt 1) $$ をもったユニタリー変換 $$ U $$ が与えられたとき,  
+$$\begin{align}
+U \lvert u \rangle = \lambda \lvert u \rangle = \exp^{2 \pi i \phi} \lvert u \rangle = \exp^{ 2 \pi i (0.a_0a_1 \dots a_n)} \lvert u \rangle
+\end{align}
+$$
+となり, 固有値ベクトル $$ \lvert u \rangle $$ も固有値 $$ \lambda $$ も, ユニタリー変換 $$ U $$ も不明でも, その位相 $$ \phi $$ を $$ n $$ ビットの精度で推定するアルゴリズムです.  
+その際には, 量子フーリエ変換（QFT, Quantum Fourier Transform）と, 制御ユニタリー（Controlled Unitary）操作が重要な役割を担います.  
+
+<img src="../images/phase_estimate_gate.png" width="800" alt="Phase Estimate Gate"/>
+
 ### 量子変分法による固有値計算（Variational Quantum Eigensolver）
 
 1. Transform the Hamiltonian of the molecule to a qubit Hamiltonian.   
@@ -227,31 +251,17 @@ The optimizer then generates a new set of control parameters that create a new t
 
 [IBM Blogより](https://developer.ibm.com/dwblog/2017/quantum-computing-qubit-vqe-variational-quantum-eigensolver/)
 
-### 制御ユニタリー（Controlled Unitrary）
-
-[TBD] Phase Estimation Algorithm について詳しく
-
-
 <img src="../images/quantum_computer_for_chem.png" width="800" alt="[quantum computer for chemistry"/>
 
 
-### 論文を読むときの Keyword (1)
+### 論文を読むときの Keyword (2)
 
 論文にある化学計算における用語に関する知識が必要となります. その用語を一部列挙します. （専門外向け）
 
 |Keyword|Description|
 |:--|:--|
-|VQE(QVEとも)| Variational Quantum Eigensolver, 量子固有値変分法<br/>|
-|PEA|Pahse Estimation Algorithm, 位相推定アルゴリズム<br/>|
-|STO-3G|[TBD]|
-|UCC|Unitary Coupled Cluster<br/>|
-|RDM|reduced density matrix<br/>|
-
-### 論文を読むときの Keyword (2)
-
-|Keyword|Description|
-|:--|:--|
 |Hartree|エネルギーの単位[^1]<br/>ボーア半径の距離を隔てた2つの電荷素量が持つポテンシャルエネルギー|
+|STO-nG基底関数系|単一のスレーター型軌道（STO）に対してn個の原始ガウス型軌道をフィッティングする系. nは2から6の値. 最も広く使われている基底関数系はSTO-3G.STO-3Gは, 水素からキセノンまでの全ての原子に対して利用可能. STO-3Gは, 3つの原始ガウス関数の線形結合で表され, その結合係数は既知. |
 |ボゴリューボフ変換|Bogoliubov transformation<br/>正準交換関係代数（または正準反交換関係代数））の或るユニタリ表現から他のユニタリ表現への交換関係代数の同型により引き起されるユニタリ変換. |
 |SCF法|Self Consistent Field 法<br/>Hartree-Fock方程式（Hamilton方程式の一種）から得られた近似解を使って, 再帰的に解く手法. これにより多粒子系のフェルミ粒子全体の作る平均場において, その中で運動する１つのフェルミ粒子の波動関数を自己無撞着（Self Consistent）に決定することができる.|
 
@@ -306,7 +316,7 @@ Apache 2.0 ライセンスのもとでPythonで主に書かれたオープンソ
 
 量子化学計算のためのライブラリですから, 量子コンピューターの実機やシミュレーターを利用する部分は, プラグインを利用するように設計されています.  
 
-**問題の量子計算（Hamiltonian）**  
+**量子化学計算の問題（Hamiltonian）**  
 ↓  
 **OpenFermion による Hamiltoian の変換（＝Qubitで表されたHamiltoianやOperatorに）**   
 ↓  
@@ -322,24 +332,25 @@ $$
 $$
 
 
+<img src="../images/arxiv_1208_5986_fig1.png" width="640" alt="[arxiv_1208_5986_fig1]"/>
 
 ### OpenFermion パッケージ群
-[TBD] 
-ops :
 
-hamiltonian : 
+**ops** : Hamiltonian を表すためのデータ構造を提供. 生成・消滅演算子（つまりは複素行列）を定義しています.   
 
-measurements : 
+**hamiltonian** : 化学計算に有用な Hamiltonian が提供されています.  
 
-transform : 
+**transform** : 電子系の Hamiltonian を量子ビット系の Hamiltonian に変換するための機能が提供されています.  
 
-utils : 
+**measurements** : 
 
-data : 
+**utils** : ユーテリティとしてのツール群.  
+
+**data** : STO-3G の数値データが HDF5フォーマットで提供されています.  
 
 
 #### OpenFermion - ops
-[TBD] 
+
 * FermionOperator
 
 * QubitOperator
@@ -348,18 +359,51 @@ data :
 
 
 #### OpenFermion - hamiltonian
-[TBD] 
+
+* MolecularData  
+
+  古典的な電子構造から得られる分子データを格納するためのクラス.  
+  場合によっては, 10MBを超える全データを個別に保存する必要があります. 保存されるデータはHDF5フォーマットです.  
+  この ModecluarData を作ったり, 扱うための関数も提供されています.  
+
+* Hubbard Model
+
+  Fermi_hubbard 関数. Fermi-Hubbard Hamiltonian を表現します.  
+
+* Plane Wave Hamiltonian
+
+  plane_wave_hamiltonian 関数. 一般形式の FermionOperator としての Hamiltonian を扱えるようにしています.  
+
+* Jordan Wigner Hamiltonian
+
+  jordan_wigner_dual_basis_hamiltonian 関数. QubitOperatoer としての Hamiltonian を扱えます.  
+
+
 #### OpenFermion - measurements
 [TBD] 
 #### OpenFermion - transform
-[TBD] 
-* Bravyi-Kitaev Super facst transform
 
-* Jordan-Wigner tranform
+* Bravyi-Kitaev (Super fast) transform
+
+  Bravyi-Kitaev Transform / BKSF（Bravyi-Kitaev Super Fast transform）のための関数.  
+
+* Jordan-Wigner tranform / reverse Jordan-Wigner tranform
+
+  Jordan-Wingner Transform のための関数.  
+  $$\begin{align}
+  a_j^\dagger -> Z_0 \dots Z_{j-1} (X_j - iY_j) / 2 \\
+  a_j -> Z_0 \dots Z_{j-1} (X_j + iY_j) / 2
+  \end{align}
+  $$
 
 * Verstraete-Cirec tranform
 
-* Fenrick Tree Node
+  （紹介していませんが）Verstraete-Cirac Transform のための関数.  
+
+* Fenwick Tree Node / Tree
+
+  Bravyi-Kitaev Transform のための Fenwick Tree を構成するためのクラス.  
+  Operator Locality in Quantum Simulation of Fermionic Models [arXiv:1701.07072](https://arxiv.org/abs/1701.07072)
 
 
 #### OpenFermion - utils / data
