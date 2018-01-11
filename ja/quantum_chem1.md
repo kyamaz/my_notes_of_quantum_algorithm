@@ -424,14 +424,14 @@ O = QubitOperator('Z1 Z2') + QubitOperator('X1') + QubitOperator('X2')
 
   mean_field_dwave 関数. BCS mean-field d-wave Hamiltonian を表します.  
   $$
-    H = - t \sum_{\langle i,j \\rangle} \sum_\sigma
+    H = - t \sum_{\langle i,j \rangle} \sum_\sigma
             (a^\dagger_{i, \sigma} a_{j, \sigma} +
              a^\dagger_{j, \sigma} a_{i, \sigma})
         - \sum_{\langle i,j \\rangle} \Delta_{ij}
-          (a^\dagger_{i, \\uparrow} a^\dagger_{j, \downarrow} -
-           a^\dagger_{i, \downarrow} a^\dagger_{j, \\uparrow} +
-           a_{j, \downarrow} a_{i, \\uparrow} -
-           a_{j, \\uparrow} a_{i, \downarrow})
+          (a^\dagger_{i, \uparrow} a^\dagger_{j, \downarrow} -
+           a^\dagger_{i, \downarrow} a^\dagger_{j, \uparrow} +
+           a_{j, \downarrow} a_{i, \uparrow} -
+           a_{j, \uparrow} a_{i, \downarrow})
   $$
 
 #### OpenFermion - measurements
@@ -493,7 +493,7 @@ O = QubitOperator('Z1 Z2') + QubitOperator('X1') + QubitOperator('X2')
 
 [OpenFermion Manual (PDF)](https://media.readthedocs.org/pdf/openfermion/latest/openfermion.pdf)
 
-  ※このPDFにあるサンプルプログラムを python のファイルにしてあります. [X}(https://github.com/kyamaz/my_notes_of_quantum_algorithm/tree/master/ja/sample/openfermion) 
+  ※このPDFにあるサンプルプログラムを python のファイルにしてあります. [X](https://github.com/kyamaz/my_notes_of_quantum_algorithm/tree/master/ja/sample/openfermion) 
 
 ### Microsoft と IBM の取り組み
 #### Q# の利用
@@ -537,7 +537,7 @@ QISKit を使った量子化学計算が提案されています. 手法論や�
 静的な分子軌道論　$$\longrightarrow$$ 高分子を対象  
 　　　　　　　　　$$\longrightarrow$$ 複雑な化学反応を対象  
 
-　　　　　　　　　　　　動分子力学法, モンテカルロ法 への量子コンンピューターの適用
+　　　　　　　　　　　　動分子力学法, モンテカルロ法 への量子コンピューターの適用
 
 ---
 
