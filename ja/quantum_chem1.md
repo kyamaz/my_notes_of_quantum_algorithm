@@ -130,7 +130,7 @@ Hartree-Fock 法は, 変分法の具体的な方式です.
 問題の Hamiltonian を次の Hartree-Fock 方程式として, 解を求める方式です.  
 
 $$\begin{align}
-- \frac{1}{2m} \nabla^2 \varphi_i(x) + V_H(x)\varphi_i(x) - \int dy V_E(x,y)\varphi_i(y) = \epsilon_i \varphi_i(x) \tag{5}\\
+- \frac{1}{2m} \nabla^2 \varphi_i(x) + V_H(x)\varphi_i(x) - \int dy V_E(x,y)\varphi_i(y) = \epsilon_i \varphi_i(x) \tag{12}\\
 \end{align}
 $$
 
@@ -159,14 +159,14 @@ $$\hspace{50px}\begin{align}\textrm{Classical Preparation} & \begin{cases}
 & \textrm{Born-Oppenheimer Approximation} \\
 & \downarrow \\
 & \textrm{Compute Orbitals} \\
-& \quad\quad \textrm{Hartree-Fock Approximation} \\
-& \quad\quad \textrm{Bogoliubov transformation} \\
+& \quad\quad \cdot \textrm{Hartree-Fock Approximation} \\
+& \quad\quad \cdot \textrm{Bogoliubov transformation} \\
 & \downarrow \\
 & \textrm{Write in Second Quantized Orbital Basis} \\
 & \downarrow \\
 & \textrm{Transform electronic Hamiltonian to qubit Hamiltonian} \\
-& \quad\quad \textrm{Bravyi-Kitaev Transform:} \mathcal{O}(\log{n}) qubits \\
-& \quad\quad \textrm{Jordan-Wigner Transform:} \mathcal{O}(n) qubits \\
+& \quad\quad \cdot \textrm{Bravyi-Kitaev Transform:} \mathcal{O}(\log{n}) qubits \\
+& \quad\quad \cdot \textrm{Jordan-Wigner Transform:} \mathcal{O}(n) qubits \\
 \end{cases} \\
 & \downarrow \\
 & \textbf{Quantum Calculation} \begin{cases}
@@ -176,11 +176,47 @@ $$\hspace{50px}\begin{align}\textrm{Classical Preparation} & \begin{cases}
 \end{align}
 $$
 
-<img src="../images/arxiv_1208_5986_fig1.png" width="420" alt="arxiv_1208_5986_fig1"/><img src="../images/arxiv_1712_00446_fig1.png" width="270" alt="arxiv_1712_00446_fig1"/>
+<img src="../images/arxiv_1208_5986_fig1.png" width="640" alt="[arxiv_1208_5986_fig1]"/><img src="../images/arxiv_1712_00446_fig1.png" width="400" alt="[arxiv_1712_00446_fig1]"/>
 
 ### Hamiltonian を量子コンピューターに投入できる形にする
 
-[TBD] Bravyi-Kitaev Transform について詳しく
+問題の Hamiltonian を量子ビットと量子ゲート操作で表します.  
+詳しくは, The Bravyi-Kitaev transformation for quantum computation of electronic structure [arxiv:1208.5986](https://arxiv.org/abs/1208.5986) を参照.  
+
+* Jordan-Winger Transform
+
+  1 フェルミ粒子（電子）を 1 Qubit に割り当てて Hamiltonian を変換する手法です.  
+  k 番目のフェルミ粒子に対する生成（消滅）演算子は,  
+  $$ \hspace{-50px}\begin{align}
+  a_k \rightarrow \Big( \prod_{j=0}^{k-1} Z_j \Big) \lvert 0 \rangle \langle 1 \rvert_k \ \,,\quad
+  a_k^{\dagger} \rightarrow \Big( \prod_{j=0}^{k-1} Z_j \Big) \lvert 1 \rangle \langle 0 \rvert_k
+  \end{align}\tag{13}
+  $$
+
+* Bravyi-Kitaev Transform
+
+  まず, Fenwick tree と呼ばれるツリー構造の Qubit を考えます.  
+  1 フェルミ粒子（電子）を, その構造に対応した Qubit に割り当てて Hamiltonian を変換する手法です.  
+
+  <img src="../images/Fenwick_4qubits.png" width="600" alt="ex) Fenwick 4-qubit"/>
+
+  j 番目の Qubit に対する生成（消滅）演算子は, 複雑です. 式では次のように表されます.  
+  $$ \hspace{-50px}\begin{align}
+  c_j = a_j + a_j^{\dagger} & \rightarrow Z_{P(j)} X_j X_{U(j)} \\
+  d_j = i \Big( a_j^{\dagger} - a_j \Big) & \rightarrow Z_{P(j)/F(j)} Y_j X_{U(j)} = Z_{C(j)} Y_j X_{U(j)} \\
+  \end{align}\tag{14}
+  $$
+
+  【水素分子の例】
+
+$$
+\begin{align}
+& H_2 \textrm{Hamiltonian} \\
+& H = g_o\mathbb{1}+g_1Z_o+g_2Z_1+g_3Z_0Z_1+g_4Y_0Y_1+g_5X_0X_1  \\
+\end{align}\tag{15}
+$$
+
+### 量子変分法による固有値計算（Variational Quantum Eigensolver）
 
 ### 制御ユニタリー（Controlled Unitrary）
 
@@ -198,7 +234,6 @@ $$
 |STO-3G||
 |UCC|Unitary Coupled Cluster<br/>|
 |RDM|reduced density matrix<br/>|
-
 
 ### 論文を読むときの Keyword (2)
 
@@ -231,7 +266,7 @@ $$
 [arxiv:1405.2696 Quantum Simulation of Helium Hydride in a Solid-State Spin Register](https://arxiv.org/abs/1405.2696)  
 
 
-<img src="../images/arxiv_1704_05018_fig3.png" width="600" alt="arxiv_1704_05018_fig3"/>
+<img src="../images/arxiv_1704_05018_fig3.png" width="600" alt="[arxiv_1704_05018_fig3]"/>
 
 ### 量子化学計算分野における巨人たちのアプローチ
 
