@@ -10,6 +10,9 @@
   "pluginsConfig": {
     "theme-api": {
       "theme": "dark"
+    },
+    "mathjax": {
+      "version": "2.6.1"
     }
   }
 }
